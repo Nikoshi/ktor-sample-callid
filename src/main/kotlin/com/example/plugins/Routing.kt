@@ -6,11 +6,17 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
+import java.net.InetAddress
+import java.netUnknownHostException
+
 fun Application.configureRouting() {
 
     routing {
         get("/") {
-            call.respondText("Hi")
+            val addr = InetAddress.getLocalHost();
+            val hostname = addr.getHostName();
+            
+            call.respondText("Hi from $hostname")
         }
 
         get("/{path...}") {
